@@ -14,19 +14,28 @@
         {{ packageItem.package.name }}
       </li>
     </ul>
+
+    <pagination
+        @pageChanged="onPageChange"
+        :page="page"
+        :size="pageSize"
+        :total="totalPackages"
+    />
   </div>
 </template>
 
 <script>
 import {mapActions} from "vuex";
+import Pagination from "@/components/Pagination";
 
 export default {
   name: 'Home',
+  components: {Pagination},
   data: () => ({
     packages: [],
     totalPackages: 0,
     pageSize: 10,
-    page: 1,
+    page: 0,
     loading: false,
     searchString: null
   }),
@@ -35,18 +44,24 @@ export default {
       searchPackages: "searchPackages"
     }),
     onSearch() {
-      this.loadPackages(this.searchString);
+      this.page = 0;
+      this.loadPackages();
     },
-    async loadPackages(searchString) {
+    onPageChange(page) {
+      this.page = page;
+      this.loadPackages();
+    },
+    async loadPackages() {
       this.loading = true;
       const response = await this.searchPackages({
-        searchString,
+        searchString: this.searchString,
         page: this.page,
         size: this.pageSize
       });
 
       this.packages = response.data.objects;
       this.totalPackages = response.data.total;
+
       this.loading = false;
     }
   }

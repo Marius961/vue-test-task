@@ -7,11 +7,9 @@ export default {
     },
     actions: {
         async searchPackages(context, { searchString, page, size }) {
-            const pageNumber = page === 1 ? 1 : page * size;
-
             const params = {
                 size,
-                from: pageNumber,
+                from: page * size,
                 text: searchString
             }
 
