@@ -1,12 +1,17 @@
 <template>
-  <ul class="pagination">
-    <li
-        v-for="pageItem in paginationList"
-        @click="onPageSelect(pageItem)"
-        :key="pageItem"
-        :class="{'current': pageItem === page}"
-    >{{ pageItem + 1 }}</li>
-  </ul>
+  <nav v-show="isShowPagination" aria-label="Page navigation example">
+    <ul class="pagination">
+      <li
+          v-for="pageItem in paginationList"
+          @click="onPageSelect(pageItem)"
+          :key="pageItem"
+          :class="{'active': pageItem === page}"
+          class="page-item"
+      >
+        <a class="page-link" href="#">{{ pageItem + 1 }}</a>
+      </li>
+    </ul>
+  </nav>
 </template>
 
 <script>
@@ -27,13 +32,14 @@ export default {
     },
   },
   computed: {
+    isShowPagination() {
+      return this.paginationList.length > 1;
+    },
     paginationList() {
       const paginationRange = 5;
 
       const result = [];
       const totalPages = Math.ceil(this.total / this.size);
-
-      console.log(totalPages);
 
       const start = this.page - paginationRange >= 0 ? this.page - paginationRange : 0;
       const end = this.page + paginationRange <= totalPages ? this.page + paginationRange : totalPages;
@@ -54,21 +60,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.pagination {
-  list-style: none;
-  display: flex;
 
-  li {
-    padding: 4px 8px;
-    border: 1px solid lightgrey;
-
-    &:not(:last-child) {
-      margin-right: 6px;
-    }
-
-    &.current {
-      background: lightgrey;
-    }
-  }
-}
 </style>
