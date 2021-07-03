@@ -6,7 +6,7 @@
   >
     <template v-slot:content>
       <div class="row p-3">
-        <div class="col">
+        <div class="col-12 col-sm-8 col-md-9 order-2 order-sm-1">
           <div class="row mb-4" v-if="rankBadge">
             <div class="col-12 h5">Badges</div>
             <div class="col-auto" v-html="rankBadge" />
@@ -30,7 +30,7 @@
             </div>
           </div>
         </div>
-        <div class="col-3">
+        <div class="col-12 col-sm-4 col-md-3 order-1 order-sm-2">
           <div class="row mb-4" v-if="isPackagePropExist('keyword')">
             <keywords-list
                 :keywords="packageItem.package.keywords"

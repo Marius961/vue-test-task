@@ -31,12 +31,15 @@ export default {
       required: true
     },
   },
+  data: () => ({
+    paginationRange: 4
+  }),
   computed: {
     isShowPagination() {
       return this.paginationList.length > 1;
     },
     paginationList() {
-      const paginationRange = 5;
+      const paginationRange = this.paginationRange;
 
       const result = [];
       const totalPages = Math.ceil(this.total / this.size);

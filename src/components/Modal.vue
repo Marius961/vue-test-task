@@ -2,7 +2,7 @@
   <transition name="backdrop-fade" appear>
     <div class="backdrop row">
       <transition name="content-fade" appear>
-        <div class="col-5 vt-modal" v-if="!loading">
+        <div class="col-11 col-md-7 col-lg-6 col-xl-5 vt-modal" v-if="!loading">
           <div class="row modal-header">
             <div class="col-auto h5">{{ title }}</div>
             <div class="col-auto">

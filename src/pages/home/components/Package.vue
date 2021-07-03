@@ -4,14 +4,14 @@
       <div class="row">
         <div class="col-12 d-flex justify-content-between align-items-center">
           <h5 class="package-name">{{ packageItem.package.name }}</h5>
-          <span class="view-details">View details></span>
+          <span class="view-details d-none d-md-inline">View details></span>
         </div>
         <div class="col-12">
           <div class="row">
-            <div class="col-7">
+            <div class="col-12 col-md-7">
               <p>{{ packageItem.package.description }}</p>
             </div>
-            <div class="col-5" v-if="packageItem.package.keywords">
+            <div class="col-12 col-md-5" v-if="packageItem.package.keywords">
               <keywords-list
                   :keywords="packageItem.package.keywords"
                   @keywordSelect="onKeywordSelect"

@@ -18,6 +18,7 @@ export default {
 body, .page {
   min-height: 100vh;
   background: #f1f1f1;
+  min-width: 320px;
 }
 
 </style>
