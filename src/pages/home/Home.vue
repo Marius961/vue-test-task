@@ -35,9 +35,13 @@
           </div>
           <div class="col-12">
             <div class="row">
-              <div v-for="packageItem in packages" :key="packageItem.package.name" class="col-12">
+              <div
+                  v-for="packageItem in packages" :key="packageItem.package.name"
+                  class="col-12"
+              >
                 <Package
                     :packageItem="packageItem"
+                    @showDetails="openDetailsModal(packageItem)"
                     @searchByKeyword="onSearch"
                 />
               </div>
@@ -60,8 +64,13 @@
         </section>
       </div>
     </main>
-    <div class="container">
-    </div>
+
+    <PackageDetailsModal
+        v-if="showDetailsModal"
+        @close="closeDetailsModal"
+        @searchByKeyword="onSearch"
+        :package-item="modalPackage"
+    />
   </div>
 </template>
 
@@ -71,10 +80,11 @@ import Pagination from "@/components/Pagination";
 import Header from "@/components/Header";
 import Package from "@/pages/home/components/Package";
 import Loader from "@/components/Loader";
+import PackageDetailsModal from "@/pages/home/components/PackageDetailsModal";
 
 export default {
   name: 'Home',
-  components: {Loader, Package, Header, Pagination},
+  components: {PackageDetailsModal, Loader, Package, Header, Pagination},
   data: () => ({
     packages: [],
     totalPackages: 0,
@@ -82,7 +92,9 @@ export default {
     page: 0,
     loading: false,
     searchString: '',
-    isSearchDirty: false
+    isSearchDirty: false,
+    modalPackage: null,
+    showDetailsModal: false
   }),
   computed: {
     isShowSearchAlert() {
@@ -105,6 +117,14 @@ export default {
     onPageChange(page) {
       this.page = page;
       this.loadPackages();
+    },
+    openDetailsModal(packageItem) {
+      this.modalPackage = packageItem;
+      this.showDetailsModal = true;
+    },
+    closeDetailsModal() {
+      this.showDetailsModal = false;
+      this.modalPackage = null;
     },
     async loadPackages() {
       this.loading = true;
