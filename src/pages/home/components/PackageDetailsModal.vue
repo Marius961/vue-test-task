@@ -42,7 +42,7 @@
             <div class="col-12">
               <ul>
                 <li v-for="( url, name )  in packageItem.package.links" :key="name">
-                  <a :href="url">{{ name }}</a>
+                  <a target="_blank" :href="url">{{ name }}</a>
                 </li>
               </ul>
             </div>

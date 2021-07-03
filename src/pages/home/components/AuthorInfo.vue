@@ -22,7 +22,7 @@
     <li v-if="isPropExist('url')">
       <label>Url: </label>
       <span>
-        <a :href="authorInfo.url">
+        <a target="_blank" :href="authorInfo.url">
           {{ authorInfo.url }}</a>
       </span>
     </li>
